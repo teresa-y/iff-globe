@@ -4,4 +4,4 @@ if you do not already have node, three.js, and vite installed:
 - run "npm install --save-dev vite" in your terminal
 
 to run the app:
-- run "npm vite" to start the server
+- run "npx vite" to start the server
