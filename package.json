@@ -39,6 +39,7 @@
     },
     "homepage": "https://github.com/vasturiano/globe.gl",
     "scripts": {
+        "deploy": "gh-pages -d dist",
         "build": "rimraf dist && rollup -c",
         "dev": "rollup -w -c rollup.config.dev.js",
         "prepare": "npm run build"
@@ -50,6 +51,7 @@
     "dependencies": {
         "@tweenjs/tween.js": "18 - 23",
         "accessor-fn": "1",
+        "gh-pages": "^6.1.1",
         "globe.gl": "^2.32.3",
         "kapsule": "1",
         "three": "^0.163.0",

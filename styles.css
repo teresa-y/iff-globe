@@ -1,35 +1,98 @@
-body { 
+/* body { 
     margin: 0; 
     position: relative;
     font-family: 'Helvetica Neue', sans-serif;
     font-weight: bold;
     font-size: 20px;
- }
+    width: 1512px;
+    height: 982px;
+ } */
 
- .or{
-    margin: 10px 0px;
-    color: white;
- }
+ body, html {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents scroll bars */
+  }
 
+  #globeViz {
+    width: 1512px; /* Fixed width for container */
+    height: 982px; /* Fixed height for container */
+    border: 1px solid #333; /* Optional: add a border for visualization */
+  }
+  
 .label{
     position: absolute; 
-    top: 50px; 
-    left: 100px; 
+    top: 28px; 
+    left: 85px; 
     z-index: 999; 
     text-align: center;
 }
 
-button{
-    background: black;
-    border: 1px solid #FA00FF;
-    font-family: 'Montserrat';    
-    font-weight: bold;
-    color: #FA00FF;
-    border-radius: 5px;
-    font-size: 16px;
+#globeCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure globe canvas is below other elements */
+    
+}
+
+.globeContainer{
+    width: 1512px; /* Fixed width for container */
+    height: 982px; /* Fixed height for container */
+    border: 1px solid #333; /* Optional: add a border for visualization */
+    position: relative;
+}
+
+
+.globeLabel {
+    position: absolute;
+    top: 300px;  /* Adjust to your preference */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 35px;
+    opacity: 0.8;
+    z-index: 1000;  /* Ensure it's above the globe */
+    /* background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
     padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: opacity 0.2s ease;
+}
+
+
+button{
+    position: absolute; 
+    top: 28px; 
+    right: 85px; 
+    background-color: transparent;
+    border: 3px solid #D93836;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #D93836;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 10px 25px;
     margin-top: 10px;
     text-transform: uppercase;
+    box-shadow:  0 0 10px #D93836,  0 0 10px #D93836 inset;
+    z-index: 999; 
+
+}
+
+
+button:hover{
+    box-shadow: 0 0 15px #D93836, 0 0 15px #D93836, 0 0 15px #D93836 inset;
+    transition: all 0.3s ease;
+    cursor: pointer;
 
 }
 

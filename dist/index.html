@@ -1,0 +1,99 @@
+<head>
+    <!-- <style> body { margin: 0; } </style> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="all" type="text/css" href="data:text/css;base64,Ym9keSB7IA0KICAgIG1hcmdpbjogMDsgDQogICAgcG9zaXRpb246IHJlbGF0aXZlOw0KICAgIGZvbnQtZmFtaWx5OiAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmOw0KICAgIGZvbnQtd2VpZ2h0OiBib2xkOw0KICAgIGZvbnQtc2l6ZTogMjBweDsNCiB9DQoNCiAub3J7DQogICAgbWFyZ2luOiAxMHB4IDBweDsNCiAgICBjb2xvcjogd2hpdGU7DQogfQ0KDQoubGFiZWx7DQogICAgcG9zaXRpb246IGFic29sdXRlOyANCiAgICB0b3A6IDUwcHg7IA0KICAgIGxlZnQ6IDEwMHB4OyANCiAgICB6LWluZGV4OiA5OTk7IA0KICAgIHRleHQtYWxpZ246IGNlbnRlcjsNCn0NCg0KYnV0dG9uew0KICAgIGJhY2tncm91bmQ6IGJsYWNrOw0KICAgIGJvcmRlcjogMXB4IHNvbGlkICNGQTAwRkY7DQogICAgZm9udC1mYW1pbHk6ICdNb250c2VycmF0JzsgICAgDQogICAgZm9udC13ZWlnaHQ6IGJvbGQ7DQogICAgY29sb3I6ICNGQTAwRkY7DQogICAgYm9yZGVyLXJhZGl1czogNXB4Ow0KICAgIGZvbnQtc2l6ZTogMTZweDsNCiAgICBwYWRkaW5nOiAxMHB4IDIwcHg7DQogICAgbWFyZ2luLXRvcDogMTBweDsNCiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOw0KDQp9DQoNCiNnbG9iZVZpensgDQogICAgcG9zaXRpb246IHJlbGF0aXZlOyANCn0NCg0KLnRleHR7DQogICAgY29sb3I6IHdoaXRlOw0KfQ0KDQo=">  
+    
+  
+    <script src="//unpkg.com/globe.gl"></script>
+  <!--  <script src="../../dist/globe.gl.js"></script>-->
+  </head>
+  
+  <body>
+  <div id="globeViz">
+    <canvas id="globeCanvas"></canvas>
+
+  </div>
+  <div class = "label">
+    <div class = "text">Drag to Explore</div>
+    <div class = "or">or</div>
+    <button onclick="randomize()">Randomize</button>
+  
+  </div>
+
+  
+  <script>
+
+    const markerHover = (el, opacity) => {
+        el.style.opacity = opacity;
+    };
+
+    const markerSvg = (countryName) => `<svg viewBox="-10 -20 49 60">
+      <path fill="currentColor" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
+      <circle fill="#7f0c0c" cx="14" cy="14" r="7"></circle>
+      <text x="14" y="-8" font-family="Helvetica Neue" font-size="15" font-weight="300" fill="white" text-anchor="middle" opacity="0">${countryName}</text>
+    </svg>`;
+    const globe = Globe()
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .backgroundColor('black');
+
+    const gData = [
+      { lat: 20.5937, lng: 78.9629, size: 30, color: 'red', name: 'India' }, // India
+      { lat: 23.6345, lng: -99.133209, size: 30, color: 'red', name: "Mexico" }, // Mexico
+      { lat: 35.8617, lng: 104.1954, size: 30, color: 'red', name: "China" }, // China
+      { lat: 33.8869, lng: 9.5375, size: 30, color: 'red', name: "Tunisia" }, // Tunisia
+      { lat: 46.2276, lng: 2.2137, size: 30, color: 'red', name: 'France' }, // France
+      { lat: 45.464664, lng: 9.188540, size: 30, color: 'red', name: "Italy" }, // Italy
+      { lat: 51.9194, lng: 19.1451, size: 30, color: 'red', name: 'Poland' }, // Poland
+      { lat: 41.390205, lng: -2.154007, size: 30, color: 'red', name: 'Spain' }, // Spain
+      { lat: 40.730610, lng: -87.935242, size: 30, color: 'red', name: 'USA' }, // United States
+      { lat: -15.793889, lng: -47.882778, size: 30, color: 'red', name: 'Brazil' }, // Brazil
+
+    ];
+
+  
+    globe
+      .htmlElementsData(gData)
+      .htmlElement(d => {
+        const el = document.createElement('div');
+        el.innerHTML = markerSvg(d.name);
+        el.style.color = d.color;
+        el.style.width = `${d.size}px`;
+  
+        el.style['pointer-events'] = 'auto';
+        el.style.cursor = 'pointer';
+
+        el.addEventListener('mouseenter', () => markerHover(el.querySelector('text'), 1));
+        el.addEventListener('mouseleave', () => markerHover(el.querySelector('text'), 0));
+
+        // el.onclick = () => console.info(d);
+
+        el.onclick = () => {
+      // Zoom in to the clicked location
+      globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 2 }, 1000);
+      setTimeout(() => {
+        // Zoom in more by adjusting the altitude
+        globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 0.75 }, 1000);
+      }, 1200);
+    };
+
+        return el;
+      })
+      (document.getElementById('globeViz'));
+
+      function randomize() {
+        globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 2 }, 1000);
+
+        setTimeout(function() {
+        // Zoom in more by adjusting the altitude
+        globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 0.75 }, 1000);
+
+      }, 1200); // Adjust the delay time as needed
+
+      }
+
+
+
+  </script>
+  </body>

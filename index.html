@@ -11,19 +11,38 @@
   </head>
   
   <body>
+
+  <div class = "globeContainer">
+
   <div id="globeViz">
+    
     <canvas id="globeCanvas"></canvas>
+  
 
   </div>
+
   <div class = "label">
-    <div class = "text">Drag to Explore</div>
-    <div class = "or">or</div>
-    <button onclick="randomize()">Randomize</button>
+    <img src="ifflogo.png" alt = "CMU IFF logo" width="207px" height="auto"/>
   
   </div>
+  
+  <div class = "globeLabel" id = "globeLabel">
+    Drag to Explore
+  </div>
+  
+  <button onclick="randomize()">Randomize</button>  
+  
+</div>
+
+
+
+
+
+
 
   
   <script>
+    
 
     const markerHover = (el, opacity) => {
         el.style.opacity = opacity;
@@ -82,6 +101,11 @@
       })
       (document.getElementById('globeViz'));
 
+      // hide label on drag
+      document.getElementById('globeViz').addEventListener('mousedown', function() {
+      document.getElementById('globeLabel').style.opacity = '0';
+        });
+
       function randomize() {
         globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 2 }, 1000);
 
@@ -92,6 +116,21 @@
       }, 1200); // Adjust the delay time as needed
 
       }
+
+          // Function to set fixed globe size
+    function setFixedGlobeSize() {
+      const fixedWidth = 1512; // Fixed width for globe
+      const fixedHeight = 982; // Fixed height for globe
+      const globeContainer = document.getElementById('globeViz');
+      globe.width(fixedWidth); // Set globe width to fixed width
+      globe.height(fixedHeight); // Set globe height to fixed height
+      globeContainer.style.width = `${fixedWidth}px`; // Apply fixed width to container
+      globeContainer.style.height = `${fixedHeight}px`; // Apply fixed height to container
+    }
+
+    // Ensure globe is set to fixed size on page load
+    window.addEventListener('load', setFixedGlobeSize);
+
 
 
 
