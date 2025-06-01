@@ -99,29 +99,34 @@
         });
 
       function randomize() {
-        globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 2 }, 1000);
+
+        const randomIndex = Math.floor(Math.random() * gData.length);
+        const randomPoint = gData[randomIndex];
+
+        // globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 2 }, 1000);
+        globe.pointOfView({ lat: randomPoint.lat, lng: randomPoint.lng, altitude: 2 }, 1000);
 
         setTimeout(function() {
         // Zoom in more by adjusting the altitude
-        globe.pointOfView({ lat: 23.6345, lng: -99.133209, altitude: 0.75 }, 1000);
+        globe.pointOfView({ lat: randomPoint.lat, lng: randomPoint.lng, altitude: 0.75 }, 1000);
 
       }, 1200); // Adjust the delay time as needed
 
       }
 
           // Function to set fixed globe size
-    function setFixedGlobeSize() {
-      const fixedWidth = 1512; // Fixed width for globe
-      const fixedHeight = 982; // Fixed height for globe
-      const globeContainer = document.getElementById('globeViz');
-      globe.width(fixedWidth); // Set globe width to fixed width
-      globe.height(fixedHeight); // Set globe height to fixed height
-      globeContainer.style.width = `${fixedWidth}px`; // Apply fixed width to container
-      globeContainer.style.height = `${fixedHeight}px`; // Apply fixed height to container
-    }
+    // function setFixedGlobeSize() {
+    //   const fixedWidth = 1512; // Fixed width for globe
+    //   const fixedHeight = 982; // Fixed height for globe
+    //   const globeContainer = document.getElementById('globeViz');
+    //   globe.width(fixedWidth); // Set globe width to fixed width
+    //   globe.height(fixedHeight); // Set globe height to fixed height
+    //   globeContainer.style.width = `${fixedWidth}px`; // Apply fixed width to container
+    //   globeContainer.style.height = `${fixedHeight}px`; // Apply fixed height to container
+    // }
 
     // Ensure globe is set to fixed size on page load
-    window.addEventListener('load', setFixedGlobeSize);
+    // window.addEventListener('load', setFixedGlobeSize);
 
 
 

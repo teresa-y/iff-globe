@@ -21,9 +21,9 @@
   }
 
   #globeViz {
-    width: 1512px; /* Fixed width for container */
-    height: 982px; /* Fixed height for container */
-    border: 1px solid #333; /* Optional: add a border for visualization */
+    /* width: 1512px; Fixed width for container */
+    /* height: 982px; Fixed height for container */
+    /* border: 1px solid #333; Optional: add a border for visualization */
   }
   
 .label{
@@ -42,12 +42,12 @@
     
 }
 
-.globeContainer{
-    width: 1512px; /* Fixed width for container */
-    height: 982px; /* Fixed height for container */
-    border: 1px solid #333; /* Optional: add a border for visualization */
+/* .globeContainer{
+    width: 1512px; 
+    height: 982px; 
+    border: 1px solid #333; 
     position: relative;
-}
+} */
 
 
 .globeLabel {
